@@ -1,4 +1,4 @@
-name: Super-Linter
+name: Validate Python Files
 
 on:
   pull_request:
