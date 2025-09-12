@@ -1,0 +1,36 @@
+name: Super-Linter
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  super-linter:
+    name: Run Super-Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
+        env:
+          # repo defaults
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BRANCH: main
+
+          # Enable/disable specific linters (Python relevant ones)
+          VALIDATE_PYTHON_PYLINT: true
+          VALIDATE_PYTHON_RUFF: true
+          VALIDATE_PYTHON_FLAKE8: true
+          VALIDATE_PYTHON_BLACK: false   # black is a formatter; super-linter can check formatting but you may prefer to run black locally
+          VALIDATE_PYTHON_ISORT: true
+
+          # Point to repo root to pick up config files like .flake8 / pyproject.toml
+          LINTER_RULES_PATH: .
