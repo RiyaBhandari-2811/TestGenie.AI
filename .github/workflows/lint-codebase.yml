@@ -1,34 +1,43 @@
-name: Lint Codebase
+name: Validate Codebase
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [opened, synchronize, reopened]
   push:
     branches:
       - main
       - master
 
-permissions:
-  contents: read
-  checks: write
-
 jobs:
   super-linter:
-    name: Run Super-Linter on All Code
+    name: Run Super-Linter
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Run GitHub Super-Linter
-        uses: github/super-linter@v6
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
         env:
+          # --- Repo defaults ---
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BRANCH: origin/main
+          DEFAULT_BRANCH: main
+
+          # --- JavaScript / React / Node ---
+          VALIDATE_JAVASCRIPT_ES: true
+          VALIDATE_TYPESCRIPT_ES: true
+
+          # --- Python ---
+          VALIDATE_PYTHON_PYLINT: true
+          VALIDATE_PYTHON_RUFF: true
+          VALIDATE_PYTHON_FLAKE8: true
+          VALIDATE_PYTHON_BLACK: true
+          VALIDATE_PYTHON_ISORT: true
+
+          # --- Java ---
+          VALIDATE_JAVA_CHECKSTYLE: true
+
+          # --- Config / misc ---
           LINTER_RULES_PATH: .
-          VALIDATE_ALL_CODEBASE: true      # Lint everything
-          RUN_LOCAL: false                  # Not required, but recommended
-          DISABLE_GITHUB_STATUS: false      # Allows PR status updates
