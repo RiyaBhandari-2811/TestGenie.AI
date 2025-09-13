@@ -78,7 +78,7 @@ fix(ai): correct typo in prompt template
 ```
 root/
 ├─ frontend/   # React + Vite + TypeScript
-├─ backend/    # Java or Node.js
+├─ backend/    # Java or Node.js/Express.js
 ├─ ai/         # Python (Google AI Agent)
 ```
 
