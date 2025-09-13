@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Your healthcare test case generator.",
   "main": "index.js",
+  "type": "module",
   "lint-staged": {
     "frontend/**/*.{ts,tsx,js,jsx}": ["eslint --fix", "prettier --write"],
     "backend/**/*.{ts,js}": ["eslint --fix", "prettier --write"],
@@ -19,7 +20,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/RiyaBhandari-2811/NiyamAI/issues"
   },
