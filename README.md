@@ -1,4 +1,5 @@
 # NiyamAI
-Your healthcare compliance-ready test case generator.
+
+Your healthcare test case generator.
 
 
