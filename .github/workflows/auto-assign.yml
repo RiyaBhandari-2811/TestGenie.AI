@@ -14,6 +14,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           addAssignees: author
           addReviewers: |
-            soham
+            sohampathak1234
             RiyaBhandari-2811
             abira-roy
