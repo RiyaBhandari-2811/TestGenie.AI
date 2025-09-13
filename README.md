@@ -1,4 +1,4 @@
-# TestGenie.AI
-Your AI-powered test case magician.
+# NiyamAI
+Your healthcare compliance-ready test case generator.
 
 
