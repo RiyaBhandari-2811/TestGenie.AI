@@ -1,0 +1,32 @@
+{
+  "name": "niyamai",
+  "version": "1.0.0",
+  "description": "Your healthcare compliance-ready test case generator.",
+  "main": "index.js",
+  "lint-staged": {
+    "frontend/**/*.{ts,tsx,js,jsx}": ["eslint --fix", "prettier --write"],
+    "backend/**/*.{ts,js}": ["eslint --fix", "prettier --write"],
+    "ai/**/*.py": ["black --quiet", "flake8"]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RiyaBhandari-2811/NiyamAI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/RiyaBhandari-2811/NiyamAI/issues"
+  },
+  "homepage": "https://github.com/RiyaBhandari-2811/NiyamAI#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "lint-staged": "^16.1.6"
+  }
+}
