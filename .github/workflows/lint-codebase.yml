@@ -1,3 +1,4 @@
+# .github/workflows/lint.yml
 name: Lint Codebase
 
 on:
@@ -20,29 +21,14 @@ jobs:
           fetch-depth: 0
 
       - name: Run GitHub Super-Linter
-        uses: github/super-linter@v4
+        uses: github/super-linter@v6
         env:
+          # GitHub token for reporting results
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          # Lint entire codebase
+          VALIDATE_ALL_CODEBASE: true
+
+          # Optional general settings
           DEFAULT_BRANCH: main
-
-          # ===== Python =====
-          VALIDATE_PYTHON_PYLINT: true
-          VALIDATE_PYTHON_RUFF: true
-          VALIDATE_PYTHON_FLAKE8: true
-          VALIDATE_PYTHON_BLACK: true
-          VALIDATE_PYTHON_ISORT: true
-
-          # ===== JavaScript / TypeScript (frontend) =====
-          VALIDATE_JAVASCRIPT_ES: true
-          VALIDATE_TYPESCRIPT_ES: true
-          VALIDATE_JAVASCRIPT_STANDARD: false   # disable if not using StandardJS
-          VALIDATE_PRETTIER: true
-
-          # ===== Java / Node (backend) =====
-          VALIDATE_JAVA_CHECKSTYLE: true
-          VALIDATE_JSON: true
-          VALIDATE_YAML: true
-
-          # General settings
           LINTER_RULES_PATH: .
-          VALIDATE_ALL_CODEBASE: true   # change to false + FILTER_REGEX_INCLUDE if you want only changed files
