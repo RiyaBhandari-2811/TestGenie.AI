@@ -27,7 +27,7 @@ jobs:
         uses: github/super-linter@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BRANCH: main
+          DEFAULT_BRANCH: origin/main
           LINTER_RULES_PATH: .
           VALIDATE_ALL_CODEBASE: true      # Lint everything
           RUN_LOCAL: false                  # Not required, but recommended
