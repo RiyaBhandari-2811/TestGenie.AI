@@ -1,4 +1,4 @@
-name: Validate Python Files
+name: Validate Codebase
 
 on:
   pull_request:
@@ -21,16 +21,23 @@ jobs:
       - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
-          # repo defaults
+          # --- Repo defaults ---
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BRANCH: main
 
-          # Enable/disable specific linters (Python relevant ones)
+          # --- JavaScript / React / Node ---
+          VALIDATE_JAVASCRIPT_ES: true
+          VALIDATE_TYPESCRIPT_ES: true
+
+          # --- Python ---
           VALIDATE_PYTHON_PYLINT: true
           VALIDATE_PYTHON_RUFF: true
           VALIDATE_PYTHON_FLAKE8: true
-          VALIDATE_PYTHON_BLACK: true   # black is a formatter;
+          VALIDATE_PYTHON_BLACK: true
           VALIDATE_PYTHON_ISORT: true
 
-          # Point to repo root to pick up config files like .flake8 / pyproject.toml
+          # --- Java ---
+          VALIDATE_JAVA_CHECKSTYLE: true
+
+          # --- Config / misc ---
           LINTER_RULES_PATH: .

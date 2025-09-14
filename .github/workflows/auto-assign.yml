@@ -1,0 +1,19 @@
+name: Auto Assign Pull Requests
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+
+jobs:
+  add-assignee:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign PR author
+        uses: kentaro-m/auto-assign-action@v2.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          addAssignees: author
+          addReviewers: |
+            sohampathak1234
+            RiyaBhandari-2811
+            abira-roy
