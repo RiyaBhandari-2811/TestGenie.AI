@@ -4,9 +4,12 @@
   "description": "Your healthcare compliance-ready test case generator.",
   "main": "index.js",
   "lint-staged": {
-    "frontend/**/*.{ts,tsx,js,jsx}": [],
+    "frontend/**/*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
     "backend/**/*.{ts,js}": [],
-    "ai/**/*.py": ["black --quiet", "flake8"]
+    "ai/**/*.py": []
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -27,6 +30,13 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "lint-staged": "^16.1.6"
+    "@eslint/js": "^9.33.0",
+    "eslint": "^9.33.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.6",
+    "prettier": "^3.6.2",
+    "typescript-eslint": "^8.39.1"
   }
 }

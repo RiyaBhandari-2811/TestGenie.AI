@@ -1,6 +1,6 @@
 # NiyamAI
 
-Your healthcare test case generator.
+Your AI-Powered Healthcare Test Case Generator.
 
 ## Setup
 
