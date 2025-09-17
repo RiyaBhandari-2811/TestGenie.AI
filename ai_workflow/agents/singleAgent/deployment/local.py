@@ -3,9 +3,8 @@ import sys
 
 import vertexai
 from dotenv import load_dotenv
-from vertexai.preview import reasoning_engines
-
 from singleAgent.agent import root_agent
+from vertexai.preview import reasoning_engines
 
 
 def main():
@@ -56,9 +55,7 @@ def main():
 
     # Send a test query
     print("\nSending test query...")
-    test_message = (
-        "Hello, how are you doing today? I hope you're having a wonderful day!"
-    )
+    test_message = "Hello, how are you doing today? I hope you're having a wonderful day!"
     print(f"Message: {test_message}")
     print("\nResponse:")
     for event in app.stream_query(

@@ -1,13 +1,12 @@
 import os
 import sys
 
+import vertexai
 from absl import app, flags
 from dotenv import load_dotenv
-import vertexai
+from singleAgent.agent import root_agent
 from vertexai import agent_engines
 from vertexai.preview import reasoning_engines
-
-from singleAgent.agent import root_agent
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string("project_id", None, "GCP project ID.")
@@ -136,9 +135,7 @@ def main(argv=None):
     load_dotenv()
 
     # Now we can safely access the flags
-    project_id = (
-        FLAGS.project_id if FLAGS.project_id else os.getenv("GOOGLE_CLOUD_PROJECT")
-    )
+    project_id = FLAGS.project_id if FLAGS.project_id else os.getenv("GOOGLE_CLOUD_PROJECT")
     location = FLAGS.location if FLAGS.location else os.getenv("GOOGLE_CLOUD_LOCATION")
     bucket = FLAGS.bucket if FLAGS.bucket else os.getenv("GOOGLE_CLOUD_STAGING_BUCKET")
     user_id = FLAGS.user_id
@@ -196,7 +193,8 @@ def main(argv=None):
         send_message(FLAGS.resource_id, user_id, FLAGS.session_id, FLAGS.message)
     else:
         print(
-            "Please specify one of: --create, --delete, --list, --create_session, --list_sessions, --get_session, or --send"
+            "Please specify one of: --create, --delete, --list, --create_session, "
+            "--list_sessions, --get_session, or --send"
         )
 
 
