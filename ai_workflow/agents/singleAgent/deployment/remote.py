@@ -1,9 +1,9 @@
 import os
 import sys
 
-import vertexai
 from absl import app, flags
 from dotenv import load_dotenv
+import vertexai
 from vertexai import agent_engines
 from vertexai.preview import reasoning_engines
 
