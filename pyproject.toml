@@ -22,9 +22,9 @@ deprecated = "^1.2.18"
 
 [tool.poetry.scripts]
 singleAgent = "singleAgent:app"
-deploy-local = "ai_workflow.agents.singleAgent.deployment.local:main"
-deploy-remote = "ai_workflow.agents.singleAgent.deployment.remote:main"
-cleanup = "ai_workflow.agents.singleAgent.deployment.cleanup:cleanup_deployment"
+deploy-local = "ai_workflow.agents.deployment.local:main"
+deploy-remote = "ai_workflow.agents.deployment.remote:main"
+cleanup = "ai_workflow.agents.deployment.cleanup:cleanup_deployment"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.13.0"
