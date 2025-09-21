@@ -1,0 +1,23 @@
+:root {
+    // ---- Colors ----
+    --color-dark-blue: hsl(210 95% 17%);
+    --color-azure: hsl(201 58% 47%);
+    --color-blue: hsl(218 62% 42%);
+    --color-light-azure: hsl(201 69% 81%);
+    --color-success: hsl(142 76% 36%);
+    --color-warning: hsl(38 92% 50%);
+    --color-destructive: hsl(0 84% 60%);
+  
+    // ---- Gradients (Light) ----
+    --gradient-hero: linear-gradient(135deg, hsl(201 58% 47%), hsl(218 62% 42%));
+    --gradient-card: linear-gradient(145deg, hsl(201 69% 95%), hsl(0 0% 100%));
+    --gradient-feature: linear-gradient(180deg, hsl(201 69% 95%), hsl(201 69% 90%));
+  
+    // ---- Gradients (Dark) ----
+    [data-theme='dark'] {
+      --gradient-hero: linear-gradient(135deg, hsl(201 58% 52%), hsl(218 62% 47%));
+      --gradient-card: linear-gradient(145deg, hsl(210 95% 17%), hsl(210 95% 12%));
+      --gradient-feature: linear-gradient(180deg, hsl(201 58% 20%), hsl(210 95% 17%));
+    }
+  }
+  
