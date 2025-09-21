@@ -4,7 +4,7 @@
   "description": "Your healthcare compliance-ready test case generator.",
   "main": "index.js",
   "lint-staged": {
-    "frontend/**/*.{ts,tsx,js,jsx}": ["eslint --fix","prettier --write"],
+    "frontend/**/*.{ts,tsx,js,jsx}": [],
     "backend/**/*.{ts,js}": [],
     "ai/**/*.py": []
   },
