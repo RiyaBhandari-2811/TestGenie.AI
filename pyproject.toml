@@ -1,0 +1,47 @@
+[project]
+name = "ai_workflow"
+version = "0.1.0"
+description = "Your AI-Powered Healthcare Test Case Generator."
+authors = [
+    {name = "Soham Pathak", email = "sohampathak1234@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache License 2.0"
+
+[tool.poetry.dependencies]
+python = ">=3.12"
+requests = "^2.31.0"
+google-adk = "^0.1.0"
+pydantic = "^2.11.3"
+python-dotenv = "^1.1.0"
+google-cloud-aiplatform = {extras = ["adk", "agent_engines"], version = "^1.42.1"}
+absl-py = "^2.1.0"
+cloudpickle = "^3.0.0"
+deprecated = "^1.2.18"
+
+[tool.poetry.scripts]
+singleAgent = "singleAgent:app"
+deploy-local = "ai_workflow.agents.singleAgent.deployment.local:main"
+deploy-remote = "ai_workflow.agents.singleAgent.deployment.remote:main"
+cleanup = "ai_workflow.agents.singleAgent.deployment.cleanup:cleanup_deployment"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.13.0"
+isort = "^6.0.1"
+black = "^25.1.0"
+flake8 = "^7.3.0"
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.ruff]
+line-length = 120
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
