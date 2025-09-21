@@ -1,67 +1,78 @@
-"use client";
+'use client';
 
-import { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Send } from "lucide-react";
+import { useState, useRef, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Loader2, Send } from 'lucide-react';
 
 interface InputFormProps {
-  onSubmit: (query: string) => void;
+  onSubmit: (query: string, pdfFile?: File | null) => void;
   isLoading: boolean;
-  context?: "homepage" | "chat"; // Add context prop for different placeholder text
+  context?: 'homepage' | 'chat';
 }
 
 export function InputForm({
   onSubmit,
   isLoading,
-  context = "homepage",
+  context = 'homepage',
 }: InputFormProps): React.JSX.Element {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    if (textareaRef.current && context === "homepage") {
+    if (textareaRef.current && context === 'homepage') {
       textareaRef.current.focus();
     }
   }, [context]);
 
   const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
-    if (inputValue.trim() && !isLoading) {
-      onSubmit(inputValue.trim());
-      setInputValue("");
+    if ((inputValue.trim() || pdfFile) && !isLoading) {
+      onSubmit(inputValue.trim(), pdfFile);
+      setInputValue('');
+      setPdfFile(null);
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSubmit(e);
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.type === 'application/pdf') {
+      setPdfFile(file);
+    } else {
+      alert('Please upload a valid PDF file.');
+      e.target.value = '';
+    }
+  };
+
   const placeholderText =
-    context === "chat"
-      ? "Add more details, ask questions, or request changes..."
-      : "What goal would you like to achieve? e.g., Build a mobile app, Plan a marketing campaign, Learn a new skill...";
+    context === 'chat'
+      ? 'Add more details, share patient scenarios, or request updates to your test cases...'
+      : 'What would you like to achieve with your tests? e.g., Validate EHR workflows, Automate FHIR API checks, Ensure HIPAA compliance...';
 
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit} className="relative">
         <div
-          className={`
-          relative flex items-end gap-3 p-3 rounded-2xl border transition-all duration-200
+          className={`relative flex items-end gap-3 p-3 rounded-2xl border transition-all duration-200
           ${
             isFocused
-              ? "border-emerald-400/50 bg-slate-800/80 shadow-lg shadow-emerald-500/10"
-              : "border-slate-700/50 bg-slate-800/50 hover:border-slate-600/50"
-          }
-          backdrop-blur-sm
-        `}
+              ? 'border-emerald-400/50 bg-slate-800/80 shadow-lg shadow-emerald-500/10'
+              : 'border-slate-700/50 bg-slate-800/50 hover:border-slate-600/50'
+          } backdrop-blur-sm`}
         >
           {/* Input Area */}
-          <div className="flex-1 relative">
+          <div className="flex-1 relative flex flex-col gap-2">
             <Textarea
               ref={textareaRef}
               value={inputValue}
@@ -79,11 +90,11 @@ export function InputForm({
                 px-0 py-3
               "
               style={{
-                fontSize: "16px",
-                lineHeight: "1.6",
-                border: "none",
-                outline: "none",
-                boxShadow: "none",
+                fontSize: '16px',
+                lineHeight: '1.6',
+                border: 'none',
+                outline: 'none',
+                boxShadow: 'none',
               }}
             />
 
@@ -93,13 +104,27 @@ export function InputForm({
                 {inputValue.length}/2000
               </div>
             )}
+
+            {/* PDF Upload */}
+            <input
+              type="file"
+              accept="application/pdf"
+              onChange={handleFileChange}
+              className="text-slate-200"
+            />
+
+            {pdfFile && (
+              <span className="text-xs text-emerald-400">
+                ✅ Selected: {pdfFile.name}
+              </span>
+            )}
           </div>
 
           {/* Send Button */}
           <Button
             type="submit"
             size="sm"
-            disabled={!inputValue.trim() || isLoading}
+            disabled={(!inputValue.trim() && !pdfFile) || isLoading}
             className="
               h-9 px-4 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700
               text-white border-0 shadow-lg transition-all duration-200
@@ -111,13 +136,13 @@ export function InputForm({
             {isLoading ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                <span className="hidden sm:inline">Planning...</span>
+                <span className="hidden sm:inline">Working...</span>
               </>
             ) : (
               <>
                 <Send className="h-4 w-4" />
                 <span className="hidden sm:inline">
-                  {context === "chat" ? "Send" : "Plan Goal"}
+                  {context === 'chat' ? 'Send' : 'Plan Goal'}
                 </span>
               </>
             )}

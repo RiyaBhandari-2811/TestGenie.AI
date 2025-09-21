@@ -149,7 +149,7 @@ export function logGoalPlanningRequest(
   deploymentType: "agent_engine" | "local_backend"
 ): void {
   console.log(
-    `📡 Goal Planning API [${deploymentType}] - Session: ${sessionId}, User: ${userId}`
+    `📡 Niyam AI API [${deploymentType}] - Session: ${sessionId}, User: ${userId}`
   );
   console.log(`📡 Goal:`, goal);
 }
